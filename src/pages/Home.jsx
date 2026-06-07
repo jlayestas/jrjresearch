@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useLanguage } from "../i18n/LanguageContext";
 import ContactForm from "../components/ContactForm";
 import heroImg from "../assets/hero-research-operations.png";
+import globeImg from "../assets/globe-coverage.jpg";
 
 export default function Home() {
   const { t, lang } = useLanguage();
@@ -102,10 +103,7 @@ export default function Home() {
           <h2>{t("coverage.title")}</h2>
         </div>
         <div className="coverage-layout">
-          <div className="map-card" aria-label="JRJ Research coverage">
-            <span className="pin mexico">Mexico</span>
-            <span className="pin colombia">Colombia</span>
-            <span className="pin usa">USA</span>
+          <div className="map-card" aria-label="JRJ Research coverage" style={{ backgroundImage: `url(${globeImg})`, backgroundSize: "cover", backgroundPosition: "center" }}>
           </div>
           <div className="coverage-copy">
             <p>{t("coverage.copy")}</p>

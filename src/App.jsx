@@ -26,7 +26,6 @@ export default function App() {
         <Route path="/services" element={<Services />} />
       </Routes>
       <Footer />
-      <a className="whatsapp" href="https://wa.me/" aria-label="WhatsApp">WA</a>
       <CookieBanner />
     </>
   );

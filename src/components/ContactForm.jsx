@@ -1,9 +1,15 @@
 import { useState } from "react";
+import emailjs from "@emailjs/browser";
 import { useLanguage } from "../i18n/LanguageContext";
+
+const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
 export default function ContactForm() {
   const { t } = useLanguage();
   const [status, setStatus] = useState("");
+  const [sending, setSending] = useState(false);
   const [fields, setFields] = useState({
     name: "",
     email: "",
@@ -16,14 +22,30 @@ export default function ContactForm() {
     setFields((f) => ({ ...f, [e.target.name]: e.target.value }));
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    const subject = encodeURIComponent("JRJ Research quote request");
-    const body = encodeURIComponent(
-      `Name: ${fields.name}\nEmail: ${fields.email}\nCountry: ${fields.country}\nMethodology: ${fields.methodology}\n\nProject details:\n${fields.details}`
-    );
-    setStatus(t("form.ready"));
-    window.location.href = `mailto:hello@jrjresearch.com?subject=${subject}&body=${body}`;
+    setSending(true);
+    setStatus("");
+    try {
+      await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        {
+          from_name: fields.name,
+          from_email: fields.email,
+          country: fields.country,
+          methodology: fields.methodology,
+          message: fields.details,
+        },
+        PUBLIC_KEY
+      );
+      setStatus(t("form.success"));
+      setFields({ name: "", email: "", country: "", methodology: "", details: "" });
+    } catch {
+      setStatus(t("form.error"));
+    } finally {
+      setSending(false);
+    }
   }
 
   return (
@@ -40,10 +62,9 @@ export default function ContactForm() {
         <span>{t("form.country")}</span>
         <select name="country" required value={fields.country} onChange={handleChange}>
           <option value="">Select</option>
-          <option>Mexico</option>
-          <option>Colombia</option>
+          <option>LATAM</option>
           <option>United States</option>
-          <option>Regional / Multi-country</option>
+          <option>Other regions</option>
         </select>
       </label>
       <label>
@@ -54,7 +75,7 @@ export default function ContactForm() {
           <option>IDIs</option>
           <option>Expert Interviews</option>
           <option>Ethnographies</option>
-          <option>Usability Testing</option>
+          <option>Usability Testing / HUT</option>
           <option>Other</option>
         </select>
       </label>
@@ -62,8 +83,8 @@ export default function ContactForm() {
         <span>{t("form.details")}</span>
         <textarea name="details" rows="5" required value={fields.details} onChange={handleChange}></textarea>
       </label>
-      <button className="button primary full" type="submit">
-        {t("form.submit")}
+      <button className="button primary full" type="submit" disabled={sending}>
+        {sending ? t("form.sending") : t("form.submit")}
       </button>
       {status && <p className="form-status" role="status">{status}</p>}
     </form>

@@ -356,7 +356,6 @@ h3 {
 .service-card p,
 .coverage-copy,
 .contact .section-heading p,
-.site-footer p,
 .rich-copy,
 .detail-item p,
 .panel-copy {
@@ -462,73 +461,10 @@ h3 {
   position: relative;
   min-height: 430px;
   overflow: hidden;
-  background:
-    radial-gradient(circle at 39% 46%, rgba(217, 154, 61, 0.35), transparent 0 4%, transparent 8%),
-    radial-gradient(circle at 49% 68%, rgba(79, 167, 161, 0.36), transparent 0 5%, transparent 9%),
-    linear-gradient(145deg, rgba(31, 95, 122, 0.95), rgba(18, 48, 74, 0.96));
   border-radius: var(--radius);
   box-shadow: var(--shadow);
 }
 
-.map-card::before {
-  content: "";
-  position: absolute;
-  inset: 54px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 48% 52% 45% 55%;
-  transform: rotate(-14deg);
-}
-
-.map-card::after {
-  content: "LATAM";
-  position: absolute;
-  right: 36px;
-  bottom: 26px;
-  color: rgba(255, 255, 255, 0.14);
-  font-size: clamp(3.5rem, 10vw, 7rem);
-  font-weight: 950;
-  line-height: 1;
-}
-
-.pin {
-  position: absolute;
-  z-index: 1;
-  display: inline-flex;
-  align-items: center;
-  min-height: 34px;
-  padding: 0 12px;
-  color: var(--ink);
-  background: var(--white);
-  border-radius: 999px;
-  font-size: 0.84rem;
-  font-weight: 900;
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
-}
-
-.pin::before {
-  content: "";
-  width: 10px;
-  height: 10px;
-  margin-right: 8px;
-  background: var(--gold);
-  border-radius: 50%;
-}
-
-.mexico {
-  left: 23%;
-  top: 36%;
-}
-
-.colombia {
-  left: 45%;
-  top: 63%;
-}
-
-.usa {
-  left: 31%;
-  top: 20%;
-  opacity: 0.7;
-}
 
 .coverage-copy {
   font-size: 1.12rem;
@@ -640,41 +576,87 @@ h3 {
 }
 
 .site-footer {
+  background: var(--ink);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.footer-inner {
   display: flex;
   justify-content: space-between;
-  gap: 28px;
-  padding: 42px clamp(18px, 4vw, 56px);
-  background: var(--white);
-  border-top: 1px solid var(--line);
+  gap: 48px;
+  padding: 56px clamp(18px, 4vw, 56px) 40px;
 }
 
-.site-footer p {
-  max-width: 480px;
-  margin: 16px 0 0;
-}
-
-.footer-links {
+.footer-brand {
   display: flex;
-  gap: 18px;
-  flex-wrap: wrap;
-  align-content: start;
-  font-weight: 800;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 300px;
 }
 
-.whatsapp {
-  position: fixed;
-  right: 18px;
-  bottom: 18px;
-  z-index: 18;
-  display: grid;
-  place-items: center;
-  width: 54px;
-  height: 54px;
+.brand--light {
+  color: var(--white) !important;
+}
+
+.brand--light .brand-mark {
+  background: var(--gold);
+  color: var(--ink);
+}
+
+.footer-tagline {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.footer-email {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--gold);
+  text-decoration: none;
+}
+
+.footer-email:hover {
+  text-decoration: underline;
+}
+
+.footer-cols {
+  display: flex;
+  gap: 56px;
+}
+
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-col a,
+.footer-col span {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.65);
+  text-decoration: none;
+}
+
+.footer-col a:hover {
   color: var(--white);
-  background: #1f8f5f;
-  border-radius: 50%;
-  box-shadow: 0 14px 32px rgba(16, 34, 53, 0.2);
-  font-weight: 950;
+}
+
+.footer-col-label {
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+  margin: 0 0 4px;
+}
+
+.footer-bottom {
+  padding: 18px clamp(18px, 4vw, 56px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.35);
 }
 
 .cookie-banner {
@@ -756,7 +738,14 @@ h3 {
     grid-column: 1 / -1;
   }
 
-  .site-footer,
+  .footer-inner {
+    flex-direction: column;
+  }
+
+  .footer-cols {
+    gap: 32px;
+  }
+
   .quote-band,
   .cookie-banner {
     align-items: flex-start;
