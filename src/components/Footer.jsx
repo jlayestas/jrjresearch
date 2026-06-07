@@ -14,6 +14,11 @@ export default function Footer() {
           </Link>
           <p className="footer-tagline">{t("footer.copy")}</p>
           <a className="footer-email" href="mailto:operations@jrjresearch.com">operations@jrjresearch.com</a>
+          <address className="footer-address">
+            1309 Coffeen Avenue STE 1200<br />
+            Sheridan, Wyoming 82801
+          </address>
+          <p className="footer-legal">A JRJ Solutions LLC company</p>
         </div>
 
         <div className="footer-cols">
