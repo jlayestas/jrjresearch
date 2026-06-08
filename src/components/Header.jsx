@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useLanguage } from "../i18n/LanguageContext";
+import logo from "../assets/jrj-research-logo-transparent.png";
 
 export default function Header() {
   const { t, lang, toggleLang } = useLanguage();
@@ -28,8 +29,7 @@ export default function Header() {
   return (
     <header className={cls}>
       <Link className="brand" to="/" aria-label="JRJ Research home">
-        <span className="brand-mark">JRJ</span>
-        <span>Research</span>
+        <img src={logo} alt="JRJ Research" className="brand-logo" />
       </Link>
 
       <button
